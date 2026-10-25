@@ -1,4 +1,4 @@
-# Analisis de Ventas - UTN TUP
+# Análisis de ventas con Python
 ## TP Gestion Colaborativa - Git, GitHub y Jira
 
 ## Integrantes
@@ -27,7 +27,7 @@ Analisis estadistico de un dataset de ventas comerciales del año 2024.
 - .gitignore
 
 ## Instrucciones para ejecutar el script
-1. Clonar el repositorio: git clone https://github.com/Bramart96/analisis-de-ventas-utn.git
+1. Clonar el repositorio: git clone https://github.com/Bramart96/analisis-ventas-python.git
 2. Abrir Google Colab
 3. Subir y ejecutar el archivo scripts/analisis_ventas.py
 
