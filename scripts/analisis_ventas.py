@@ -7,6 +7,7 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 
 # Importamos el dataset directamente desde la URL publica del repositorio.
 # Usamos una URL en lugar de ruta local para garantizar que el script
@@ -43,13 +44,77 @@ print(ventas_por_dia)
 # Generamos el grafico de evolucion de ventas diarias.
 # La visualizacion facilita identificar tendencias y patrones que los
 # numeros solos no muestran de forma clara.
-plt.figure(figsize=(10,5))
-plt.plot(ventas_por_dia.index, ventas_por_dia.values)
-plt.title("Evolucion de ventas por dia")
-plt.xlabel("Fecha")
-plt.ylabel("Ventas")
-plt.xticks(rotation=45)
-plt.grid(True)
-plt.savefig("resultados/grafico_ventas.png", bbox_inches="tight")
+
+# ==========================================
+# VISUALIZACIÓN DE VENTAS
+# ==========================================
+
+# Convertir fechas y ordenar cronológicamente
+df["sales_date"] = pd.to_datetime(
+    df["sales_date"],
+    errors="coerce"
+)
+
+ventas_diarias = (
+    df.dropna(subset=["sales_date"])
+    .groupby("sales_date")["sales_amount"]
+    .sum()
+    .sort_index()
+)
+
+# Crear gráfico
+fig, ax = plt.subplots(figsize=(13, 6))
+
+ax.plot(
+    ventas_diarias.index,
+    ventas_diarias.values,
+    linewidth=1.5,
+    label="Ventas diarias"
+)
+
+# Configurar fechas del eje X
+ax.xaxis.set_major_locator(
+    mdates.MonthLocator()
+)
+
+ax.xaxis.set_major_formatter(
+    mdates.DateFormatter("%b %Y")
+)
+
+# Títulos y etiquetas
+ax.set_title(
+    "Evolución de ventas diarias — 2024",
+    fontsize=15,
+    fontweight="bold",
+    pad=18
+)
+
+ax.set_xlabel("Mes")
+ax.set_ylabel("Importe de ventas")
+
+# Cuadrícula horizontal
+ax.grid(
+    axis="y",
+    linestyle="--",
+    alpha=0.3
+)
+
+ax.legend()
+
+# Mejorar distribución
+fig.autofmt_xdate()
+plt.tight_layout()
+
+# Guardar evidencia
+plt.savefig(
+    "resultados/grafico_ventas.png",
+    dpi=200,
+    bbox_inches="tight"
+)
+
 plt.show()
-print("Grafico guardado en /resultados ✓")
+
+print(
+    "\nGráfico actualizado y guardado en "
+    "resultados/grafico_ventas.png"
+)
