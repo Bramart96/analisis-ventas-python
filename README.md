@@ -28,13 +28,28 @@ Analisis estadistico de un dataset de ventas comerciales del año 2024.
 
 ## Instrucciones para ejecutar el script
 1. Clonar el repositorio: git clone https://github.com/Bramart96/analisis-ventas-python.git
-2. Abrir Google Colab
-3. Subir y ejecutar el archivo scripts/analisis_ventas.py
+2. Instalar dependencias: `python -m pip install pandas matplotlib`
+3. Desde la raíz del repositorio ejecutar: `python scripts/analisis_ventas.py`
 
-## Resultados
-- Total y promedio de ventas del periodo
-- Valores maximos y minimos de ventas
-- Grafico de evolucion de ventas diarias
+**Nota:** la ejecución actual requiere acceso a internet porque el script obtiene el CSV desde una URL externa. También existe una copia del dataset en `datos/`.
+
+## Resultados verificados (ejecución local)
+
+| Indicador | Resultado |
+| --- | ---: |
+| Registros procesados | 366 |
+| Total de ventas | 1.812.114 |
+| Promedio diario | 4.951,13 |
+| Venta máxima | 8.960 |
+| Venta mínima | 1.003 |
+
+Se comprobó la carga de datos, los cálculos con pandas, la agrupación temporal y la generación del gráfico en Matplotlib. Son valores del dataset de ejemplo, sin moneda especificada.
+
+### Evidencia gráfica
+
+![Evolución de ventas diarias — 2024](resultados/grafico_ventas.png)
+
+**Alcance:** análisis exploratorio académico. El script aún depende de una URL externa para cargar el archivo y no tiene pruebas automatizadas documentadas.
 
 ## Trazabilidad
 Proyecto gestionado con Jira. Cada commit referencia su issue correspondiente.
